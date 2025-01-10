@@ -75,10 +75,28 @@ const getEnrollmentsByUserId = async (req, res) => {
   }
 };
 
+
+/**
+ * Controlador para obtener todas las matrículas por `professor_id`.
+ * 
+ * @param {Object} req - La solicitud HTTP.
+ * @param {Object} res - La respuesta HTTP.
+ */
+const getEnrollmentsByProfessorId = async (req, res) => {
+  try {
+    const enrollments = await enrollmentService.getEnrollmentsByProfessorId(Number(req.params.professorId));
+    res.status(200).json(enrollments);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 module.exports = {
   enrollStudent,
   getEnrollmentById,
   getEnrollmentsByUserId,
+  getEnrollmentsByProfessorId,
   updateEnrollment,
   deleteEnrollment
 };

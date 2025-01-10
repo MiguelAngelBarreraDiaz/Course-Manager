@@ -7,6 +7,7 @@ const router = express.Router();
 router.post('/', enrollmentController.enrollStudent);
 router.get('/:id', enrollmentController.getEnrollmentById);
 router.get('/user/:userId', enrollmentController.getEnrollmentsByUserId);
+router.get('/professor/:professorId', enrollmentController.getEnrollmentsByProfessorId);
 router.put('/:id', enrollmentController.updateEnrollment);
 router.delete('/:id', enrollmentController.deleteEnrollment);
 

@@ -1,4 +1,4 @@
-const { UserCourse } = require('../models');
+const { UserCourse, Course, User } = require('../models');
 
 /**
  * Matricula a un estudiante en un curso.
@@ -77,16 +77,60 @@ const deleteEnrollment = async (id) => {
 };
 
 /**
- * Obtiene todas las matrículas por `user_id`.
+ * Obtiene todas las matrículas por `user_id` e incluye el curso asociado.
  * 
  * @param {number} userId - El ID del usuario.
- * @returns {Array} - La lista de matrículas.
+ * @returns {Array} - La lista de matrículas con los cursos asociados.
  * @throws {Error} - Si ocurre un error al obtener las matrículas.
  */
 const getEnrollmentsByUserId = async (userId) => {
   try {
     const enrollments = await UserCourse.findAll({
-      where: { user_id: userId }
+      where: { user_id: userId },
+      include: [
+        {
+          model: Course,
+          as: 'course'
+        }
+      ]
+    });
+    return enrollments;
+  } catch (error) {
+    throw new Error('Error al obtener las matrículas: ' + error.message);
+  }
+};
+
+
+/**
+ * Obtiene todas las matrículas por `professor_id` e incluye el curso y los estudiantes asociados.
+ * 
+ * @param {number} professorId - El ID del profesor.
+ * @returns {Array} - La lista de matrículas con los cursos y estudiantes asociados.
+ * @throws {Error} - Si ocurre un error al obtener las matrículas.
+ */
+const getEnrollmentsByProfessorId = async (professorId) => {
+  try {
+    const enrollments = await UserCourse.findAll({
+      where: { user_id: professorId },
+      include: [
+        {
+          model: Course,
+          as: 'course',
+          include: [
+            {
+              model: UserCourse,
+              as: 'enrollments',
+              include: [
+                {
+                  model: User,
+                  as: 'user',
+                  where: { role_id: 4 }
+                }
+              ]
+            }
+          ]
+        }
+      ]
     });
     return enrollments;
   } catch (error) {
@@ -99,6 +143,7 @@ module.exports = {
   enrollStudent,
   getEnrollmentById,
   getEnrollmentsByUserId,
+  getEnrollmentsByProfessorId,
   updateEnrollment,
   deleteEnrollment
 };
