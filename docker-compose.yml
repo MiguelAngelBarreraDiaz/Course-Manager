@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./COURSE-MANAGER-BACKEND      # Ruta donde está el Dockerfile
+      dockerfile: Dockerfile                 # Nombre del Dockerfile
+    container_name: course-Manager-Backend   # Nombre del contenedor
+    ports:
+      - "3000:3000"                # Mapea el puerto 3000 del contenedor al host
+    environment:
+      APP_PORT: 3000
+      DB_HOST: database            # Nombre del servicio de la base de datos
+      DB_PORT: 3306
+      DB_USER: aulasuser
+      DB_PASSWORD: aulaspassword
+      DB_NAME: aulas
+    depends_on:
+      - database                   # Espera a que la base de datos esté disponible antes de levantar el backend
+    restart: always                # Reinicia el contenedor si falla
+
+  database:
+    image: mysql:8.0               # Imagen de MySQL
+    container_name: coursemanager_database # Nombre del contenedor
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: aulas
+      MYSQL_USER: aulasuser
+      MYSQL_PASSWORD: aulaspassword
+    ports:
+      - "3306:3306"                # Mapea el puerto 3306 del contenedor al host
+    volumes:
+      - db_data:/var/lib/mysql     # Persiste los datos en un volumen
+    restart: always                # Reinicia el contenedor si falla
+
+volumes:
+  db_data:                         # Volumen para persistir los datos de la base de datos
