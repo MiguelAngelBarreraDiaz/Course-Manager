@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const userRoutes = require('./routes/user.routes');
 const courseRoutes = require('./routes/course.routes');
 const enrollmentRoutes = require('./routes/enrollment.routes');
@@ -10,6 +11,15 @@ const seedStatuses = require('./seeders/statuses_seeder');
 const seedAdminUser = require('./seeders/users_seeder');
 
 const app = express();
+
+// Configuración de CORS - Añade esto antes de los otros middlewares
+app.use(cors({
+  origin: 'http://localhost:4200',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+
 
 // Middleware
 app.use(express.json());
