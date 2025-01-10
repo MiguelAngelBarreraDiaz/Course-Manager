@@ -1,4 +1,7 @@
 const express = require('express');
+const userRoutes = require('./routes/user.routes');
+const courseRoutes = require('./routes/course.routes');
+const enrollmentRoutes = require('./routes/enrollment.routes');
 const { sequelize } = require('./models');
 const seedRoles = require('./seeders/roles_seeder');
 const seedModalities = require('./seeders/modalities_seeder');
@@ -6,6 +9,14 @@ const seedStatuses = require('./seeders/statuses_seeder');
 
 const app = express();
 
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Rutas
+app.use('/users', userRoutes);
+app.use('/courses', courseRoutes);
+app.use('/enrollments', enrollmentRoutes);
 
 // Sincronizar la base de datos y ejecutar los seeders
 const initializeDatabase = async () => {
@@ -27,5 +38,6 @@ const initializeDatabase = async () => {
 };
 
 initializeDatabase();
+
 
 module.exports = app;

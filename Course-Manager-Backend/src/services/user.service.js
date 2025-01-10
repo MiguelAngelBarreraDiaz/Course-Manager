@@ -76,9 +76,25 @@ const deleteUser = async (id) => {
   }
 };
 
+/**
+ * Obtiene todos los usuarios.
+ * 
+ * @returns {Array} - La lista de usuarios.
+ * @throws {Error} - Si ocurre un error al obtener los usuarios.
+ */
+const getAllUsers = async () => {
+  try {
+    const users = await User.findAll();
+    return users;
+  } catch (error) {
+    throw new Error('Error al obtener los usuarios: ' + error.message);
+  }
+};
+
 module.exports = {
   createUser,
   getUserById,
+  getAllUsers,
   updateUser,
   deleteUser
 };

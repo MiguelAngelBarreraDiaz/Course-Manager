@@ -76,9 +76,29 @@ const deleteEnrollment = async (id) => {
   }
 };
 
+/**
+ * Obtiene todas las matrículas por `user_id`.
+ * 
+ * @param {number} userId - El ID del usuario.
+ * @returns {Array} - La lista de matrículas.
+ * @throws {Error} - Si ocurre un error al obtener las matrículas.
+ */
+const getEnrollmentsByUserId = async (userId) => {
+  try {
+    const enrollments = await UserCourse.findAll({
+      where: { user_id: userId }
+    });
+    return enrollments;
+  } catch (error) {
+    throw new Error('Error al obtener las matrículas: ' + error.message);
+  }
+};
+
+
 module.exports = {
   enrollStudent,
   getEnrollmentById,
+  getEnrollmentsByUserId,
   updateEnrollment,
   deleteEnrollment
 };
