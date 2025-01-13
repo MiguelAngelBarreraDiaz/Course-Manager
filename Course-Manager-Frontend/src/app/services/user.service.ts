@@ -8,8 +8,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = `${environment.apiUrl}/auth`;
-
+  private apiUrl = `${environment.apiUrl}/users`;
+  
   constructor(private http: HttpClient) { }
 
   // Método privado para configurar los headers

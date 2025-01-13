@@ -8,8 +8,9 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class EnrollmentService {
-  private apiUrl = `${environment.apiUrl}/auth`;
 
+  private apiUrl = `${environment.apiUrl}/enrollments`;
+  
   constructor(private http: HttpClient) {}
 
   private getHeaders(): HttpHeaders {
