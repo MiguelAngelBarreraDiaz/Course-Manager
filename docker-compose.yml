@@ -19,6 +19,17 @@ services:
       - database                   # Espera a que la base de datos esté disponible antes de levantar el backend
     restart: always                # Reinicia el contenedor si falla
 
+  frontend:
+    build:
+      context: ./Course-Manager-Frontend     # Ruta donde está el Dockerfile
+      dockerfile: Dockerfile                 # Nombre del Dockerfile
+    container_name: course-manager-frontend  # Nombre del contenedor
+    ports:
+      - "80:80"                    # Mapea el puerto 80 del contenedor al host
+    depends_on:
+      - backend                    # Espera a que el backend esté disponible antes de levantar el frontend
+    restart: always                # Reinicia el contenedor si falla
+
   database:
     image: mysql:8.0               # Imagen de MySQL
     container_name: coursemanager_database # Nombre del contenedor
