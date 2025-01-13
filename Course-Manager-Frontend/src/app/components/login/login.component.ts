@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private tokenValidationService: TokenValidationService, private router: Router) {}
 
   ngOnInit() {
+    localStorage.removeItem('token');
     this.tokenValidationService.validateToken();
   }
 

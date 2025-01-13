@@ -92,11 +92,30 @@ const getStudentsByCourseId = async (req, res) => {
   }
 };
 
+
+/**
+ * Controlador para obtener todos los usuarios con role_id 2, 3, 4 que no están inscritos en un curso específico.
+ * 
+ * @param {Object} req - La solicitud HTTP.
+ * @param {Object} res - La respuesta HTTP.
+ */
+const getUsersNotEnrolledInCourse = async (req, res) => {
+  try {
+    const users = await courseService.getUsersNotEnrolledInCourse(Number(req.params.id));
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+
 module.exports = {
   createCourse,
   getCourseById,
   updateCourse,
   deleteCourse,
   getAllCourses,
-  getStudentsByCourseId
+  getStudentsByCourseId,
+  getUsersNotEnrolledInCourse
 };

@@ -15,7 +15,8 @@ const seedUsers = async () => {
     last_name: 'User',
     email: 'student@example.com',
     password: await bcrypt.hash('studentpassword', 10),
-    role_id: 4
+    role_id: 4,
+    phone: '123-456-7890',
   };
 
   const professorData = {
@@ -23,7 +24,8 @@ const seedUsers = async () => {
     last_name: 'User',
     email: 'professor@example.com',
     password: await bcrypt.hash('professorpassword', 10),
-    role_id: 3
+    role_id: 3,
+    phone: '987-654-3210',
   };
 
   try {

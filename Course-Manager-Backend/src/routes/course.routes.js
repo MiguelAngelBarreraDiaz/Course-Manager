@@ -48,4 +48,11 @@ router.get('/', authenticate, courseController.getAllCourses);
  */
 router.get('/:id/students', authenticate, courseController.getStudentsByCourseId);
 
+/**
+ * @route GET /courses/:id/not-enrolled-users
+ * @description Obtiene todos los usuarios con role_id 2, 3, 4 que no están inscritos en un curso específico
+ * @access Private
+ */
+router.get('/:id/not-enrolled-users', authenticate, courseController.getUsersNotEnrolledInCourse);
+
 module.exports = router;

@@ -20,6 +20,7 @@ export class CreateCourseComponent {
     this.courseService.createCourse(this.course).subscribe({
       next: (createdCourse) => {
         console.log('Curso creado exitosamente:', createdCourse);
+        this.course = new Course(0, '', 0, 0, 0);
         //this.router.navigate(['/courses']);
       },
       error: (error) => {

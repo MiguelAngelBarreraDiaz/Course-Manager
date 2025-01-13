@@ -10,6 +10,7 @@ const seedModalities = require('./seeders/modalities_seeder');
 const seedStatuses = require('./seeders/statuses_seeder');
 const seedUsers = require('./seeders/users_seeder');
 const seedCourses = require('./seeders/courses_seeder');
+const seedEnrollments = require('./seeders/enrollment_seeder');
 
 const app = express();
 
@@ -47,8 +48,9 @@ const initializeDatabase = async () => {
     await seedModalities();
     await seedStatuses();
     await seedUsers();
-    await seedCourses;
-
+    await seedCourses();
+    await seedEnrollments();
+    
   } catch (error) {
     console.error('Error al inicializar la base de datos:', error.message);
   }

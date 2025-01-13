@@ -9,7 +9,7 @@ import { Course } from '../models/course.model';
 export class CourseService {
   private apiUrl = 'http://localhost:3000/courses';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * Obtiene los encabezados de autenticación.
@@ -18,10 +18,7 @@ export class CourseService {
    */
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
+    return new HttpHeaders().set('Authorization', `${token}`);
   }
 
   /**
@@ -89,4 +86,17 @@ export class CourseService {
     const headers = this.getHeaders();
     return this.http.get<any[]>(`${this.apiUrl}/${id}/students`, { headers });
   }
+
+
+  /**
+ * Obtiene todos los usuarios con role_id 2, 3, 4 que no están inscritos en un curso específico.
+ * 
+ * @param {number} id - El ID del curso.
+ * @returns {Observable<any[]>} - Un observable con la lista de usuarios no inscritos.
+ */
+  getUsersNotEnrolledInCourse(id: number): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.http.get<any[]>(`${this.apiUrl}/${id}/not-enrolled-users`, { headers });
+  }
+
 }

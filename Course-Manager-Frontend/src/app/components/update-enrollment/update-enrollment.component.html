@@ -1,0 +1,81 @@
+<div class="container mt-5">
+    <div class="card shadow-lg">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Detalles del Estudiante</h4>
+      </div>
+      <div class="card-body">
+        <!-- Información del estudiante -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="studentFirstName" class="form-label fw-bold">Nombre:</label>
+            <input
+              type="text"
+              id="studentFirstName"
+              class="form-control"
+              [value]="student?.first_name"
+              readonly
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="studentLastName" class="form-label fw-bold">Apellido:</label>
+            <input
+              type="text"
+              id="studentLastName"
+              class="form-control"
+              [value]="student?.last_name"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="studentEmail" class="form-label fw-bold">Correo Electrónico:</label>
+            <input
+              type="email"
+              id="studentEmail"
+              class="form-control"
+              [value]="student?.email"
+              readonly
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="studentPhone" class="form-label fw-bold">Teléfono:</label>
+            <input
+              type="text"
+              id="studentPhone"
+              class="form-control"
+              [value]="student?.phone"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="statusId" class="form-label fw-bold">Estado Actual:</label>
+            <input
+              type="text"
+              id="statusId"
+              class="form-control"
+              [value]="getStatusLabel(student?.inscription_status_id)"
+              readonly
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="enrollmentStatus" class="form-label fw-bold">Nuevo Estado de Inscripción:</label>
+            <select id="enrollmentStatus" class="form-select" [(ngModel)]="selectedStatus">
+              <option value="1" [selected]="student?.inscription_status_id === 1">Inscripto</option>
+              <option value="2" [selected]="student?.inscription_status_id === 2">Aprobado</option>
+              <option value="3" [selected]="student?.inscription_status_id === 3">Rechazado</option>
+              <option value="4" [selected]="student?.inscription_status_id === 4">Certificado</option>
+            </select>
+          </div>
+        </div>
+  
+      </div>
+      <div class="card-footer text-end">
+        <button class="btn btn-success" (click)="updateEnrollment()">Actualizar</button>
+        <button class="btn btn-secondary ms-2" (click)="goBack()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  

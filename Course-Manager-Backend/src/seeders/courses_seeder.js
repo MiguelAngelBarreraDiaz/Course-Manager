@@ -40,6 +40,5 @@ const seedCourses = async () => {
   }
 };
 
-seedCourses();
 
 module.exports = seedCourses;

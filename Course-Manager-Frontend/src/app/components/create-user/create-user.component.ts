@@ -33,6 +33,15 @@ export class CreateUserComponent {
     this.userService.createUser(this.user).subscribe({
       next: (createdUser) => {
         console.log('Usuario creado:', createdUser);
+        this.user =  {
+          id: null,
+          first_name: '',
+          last_name: '',
+          email: '',
+          role_id: 0,
+          password: '',
+          phone: ''
+        };
       },
       error: (error) => {
         console.error('Error al crear usuario:', error);
