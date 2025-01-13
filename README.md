@@ -33,3 +33,9 @@ Una vez ingrese a la aplicación va a acceder por la siguiente url:
     email: admin@example.com
     password: adminpassword
 
+> [!TIP]
+> Puede utilizar `docker-compose down` para detener y eliminar todos los contenedores creados por `docker-compose up`.
+
+
+> [!NOTE]
+> Autor: Miguel Angel Barrera Diaz
