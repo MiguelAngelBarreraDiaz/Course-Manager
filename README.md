@@ -8,10 +8,10 @@ Frontend: Desarrollado con Angular, se encarga de la interfaz de usuario y la in
 Backend: Desarrollado con Node.js y Express, maneja la lógica del negocio y la comunicación con la base de datos.
 Base de Datos: Utiliza MySQL para almacenar la información de los cursos y usuarios.
 
-    +-------------+       +---------------+         +--------------+
-    |   Cliente   |       |    Proxy      |         |   Backend    | 
-    |  (Frontend) |＜---->|   Server      | ＜----> |  (Node.js)   |
-    +-------------+       +---------------+         +--------------+
+    +----------------+      +---------------+         +--------------+         +--------------+
+    | Base de       |       | Backend       |         | Frontend     |         |   Cliente     |
+    | Datos MySql   |＜---->| (Node.js)     | ＜----> | (Angular)    | ＜----> |               |
+    +---------------+       +---------------+         +--------------+         +--------------+
 
 ## Instrucciones de uso
 
