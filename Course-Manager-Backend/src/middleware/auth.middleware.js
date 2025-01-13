@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 
-const secret = process.env.JWT_SECRET || 'your_jwt_secret';
+const secret = process.env.JWT_SECRET || 'C0IPMDPiGV';
 
 /**
  * Middleware de autenticación para proteger rutas.
@@ -12,6 +12,8 @@ const secret = process.env.JWT_SECRET || 'your_jwt_secret';
  */
 const authenticate = async (req, res, next) => {
   const token = req.headers['authorization'];
+  console.log("ESTE ES EL TOKEN");
+  console.log(token);
   if (!token) {
     return res.status(401).json({ message: 'Token no proporcionado' });
   }
@@ -21,6 +23,7 @@ const authenticate = async (req, res, next) => {
     req.user = await User.findByPk(decoded.id);
     next();
   } catch (error) {
+    console.error('Error al verificar el token:', error);
     return res.status(401).json({ message: 'Token inválido' });
   }
 };

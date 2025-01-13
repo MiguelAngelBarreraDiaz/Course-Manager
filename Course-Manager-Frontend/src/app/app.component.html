@@ -1,0 +1,6 @@
+<div *ngIf="isLoggedIn()">
+    <app-sidebar></app-sidebar>
+</div>
+<div [style.margin-left]="isLoggedIn() ? '250px' : '0'" style="padding: 1rem;">
+    <router-outlet></router-outlet>
+</div>

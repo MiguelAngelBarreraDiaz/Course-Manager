@@ -139,6 +139,7 @@ const getEnrollmentsByProfessorId = async (professorId) => {
 };
 
 
+
 module.exports = {
   enrollStudent,
   getEnrollmentById,

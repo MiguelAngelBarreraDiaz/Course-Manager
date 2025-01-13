@@ -1,0 +1,55 @@
+<div class="container-fluid py-4">
+    <div class="card bg-dark text-white">
+      <div class="card-header">
+        <h3 class="card-title mb-0">Cursos Disponibles</h3>
+      </div>
+      <div class="card-body">
+        <!-- Loading Spinner -->
+        <div *ngIf="loading" class="text-center py-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+  
+        <!-- Error Message -->
+        <div *ngIf="error" class="alert alert-danger" role="alert">
+          {{ error }}
+        </div>
+  
+        <!-- Courses Table -->
+        <div *ngIf="!loading && !error" class="table-responsive">
+          <table class="table table-dark table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Modalidad</th>
+                <th scope="col">Duración (Semanas)</th>
+                <th scope="col">Cupo</th>
+                <th scope="col">Fecha Creación</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let course of courses">
+                <td>{{ course.name }}</td>
+                <td>{{ getModalityName(course.modality_id) }}</td>
+                <td>{{ course.duration }}</td>
+                <td>{{ course.quota }}</td>
+                <td>{{ course.created_at | date:'dd/MM/yyyy' }}</td>
+                <td>
+                  <button class="btn btn-secondary btn-sm" (click)="onEnroll(course.id)">
+                    <i class="bi bi-person-plus"></i> Matricular
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  
+        <!-- No Courses Message -->
+        <div *ngIf="!loading && !error && courses.length === 0" class="text-center py-5">
+          <p class="text-muted mb-0">No hay cursos disponibles</p>
+        </div>
+      </div>
+    </div>
+  </div>

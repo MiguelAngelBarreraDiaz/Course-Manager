@@ -1,0 +1,162 @@
+<div class="container-fluid py-4">
+    <div class="card bg-dark text-white mb-4">
+        <div class="card-header">
+            <h3 class="card-title mb-0">Matricular Usuarios</h3>
+        </div>
+        <div class="card-body">
+            <!-- Enrollment Form -->
+            <div class="row g-3 mb-4">
+                <!-- Coordinator Select -->
+                <div class="col-md-4">
+                    <label for="coordinatorSelect" class="form-label">Coordinadores</label>
+                    <div class="d-flex gap-2">
+                        <select id="coordinatorSelect" class="form-select bg-dark text-white"
+                            [(ngModel)]="selectedCoordinator" [disabled]="selectedProfessor > 0 || selectedStudent > 0">
+                            <option value="0">Seleccionar Coordinador</option>
+                            <option *ngFor="let user of getNotEnrolledByRole(2)" [value]="user.id">
+                                {{user.first_name}} {{user.last_name}}
+                            </option>
+                        </select>
+                        <button class="btn btn-primary" (click)="enrollUser(selectedCoordinator)"
+                            [disabled]="!selectedCoordinator">
+                            Matricular
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Professor Select -->
+                <div class="col-md-4">
+                    <label for="professorSelect" class="form-label">Profesores</label>
+                    <div class="d-flex gap-2">
+                        <select id="professorSelect" class="form-select bg-dark text-white"
+                            [(ngModel)]="selectedProfessor" [disabled]="selectedCoordinator > 0 || selectedStudent > 0">
+                            <option value="0">Seleccionar Profesor</option>
+                            <option *ngFor="let user of getNotEnrolledByRole(3)" [value]="user.id">
+                                {{user.first_name}} {{user.last_name}}
+                            </option>
+                        </select>
+                        <button class="btn btn-primary" (click)="enrollUser(selectedProfessor)"
+                            [disabled]="!selectedProfessor">
+                            Matricular
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Student Select -->
+                <div class="col-md-4">
+                    <label for="studentSelect" class="form-label">Estudiantes</label>
+                    <div class="d-flex gap-2">
+                        <select id="studentSelect" class="form-select bg-dark text-white" [(ngModel)]="selectedStudent"
+                            [disabled]="selectedCoordinator > 0 || selectedProfessor > 0">
+                            <option value="0">Seleccionar Estudiante</option>
+                            <option *ngFor="let user of getNotEnrolledByRole(4)" [value]="user.id">
+                                {{user.first_name}} {{user.last_name}}
+                            </option>
+                        </select>
+                        <button class="btn btn-primary" (click)="enrollUser(selectedStudent)"
+                            [disabled]="!selectedStudent">
+                            Matricular
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Coordinators Table -->
+            <div class="mb-4">
+                <h4>Coordinadores Matriculados</h4>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Fecha de Registro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let coordinator of getEnrolledByRole(2)">
+                                <td>{{coordinator.id}}</td>
+                                <td>{{coordinator.first_name}} {{coordinator.last_name}}</td>
+                                <td>{{coordinator.email}}</td>
+                                <td>{{coordinator.phone}}</td>
+                                <td>{{coordinator.created_at | date:'dd/MM/yyyy'}}</td>
+                            </tr>
+                            <tr *ngIf="getEnrolledByRole(2).length === 0">
+                                <td colspan="5" class="text-center">No hay coordinadores matriculados</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Professors Table -->
+            <div class="mb-4">
+                <h4>Profesores Matriculados</h4>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Fecha de Registro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let professor of getEnrolledByRole(3)">
+                                <td>{{professor.id}}</td>
+                                <td>{{professor.first_name}} {{professor.last_name}}</td>
+                                <td>{{professor.email}}</td>
+                                <td>{{professor.phone}}</td>
+                                <td>{{professor.created_at | date:'dd/MM/yyyy'}}</td>
+                            </tr>
+                            <tr *ngIf="getEnrolledByRole(3).length === 0">
+                                <td colspan="5" class="text-center">No hay profesores matriculados</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Students Table -->
+            <div class="mb-4">
+                <h4>Estudiantes Matriculados</h4>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Fecha de Registro</th>
+                                <th>Estado inscripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let student of getEnrolledByRole(4)">
+                                <td>{{student.id}}</td>
+                                <td>{{student.first_name}} {{student.last_name}}</td>
+                                <td>{{student.email}}</td>
+                                <td>{{student.phone}}</td>
+                                <td>{{student.created_at | date:'dd/MM/yyyy'}}</td>
+                                <td>{{getInscriptionStatusLabel(student.inscription_status_id)}}</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm" (click)="redirectToUpdateEnrollment(student)">Editar</button>
+                                </td>
+                            </tr>
+                            <tr *ngIf="getEnrolledByRole(4).length === 0">
+                                <td colspan="5" class="text-center">No hay estudiantes matriculados</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,2 +1,10 @@
 # Ignore the node_modules directory
 node_modules/
+
+# Ignore the .angular directory
+.angular/
+
+# Angular
+dist/
+out-tsc/
+coverage/

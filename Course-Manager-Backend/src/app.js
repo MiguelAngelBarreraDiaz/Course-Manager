@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const userRoutes = require('./routes/user.routes');
 const courseRoutes = require('./routes/course.routes');
 const enrollmentRoutes = require('./routes/enrollment.routes');
@@ -7,9 +8,20 @@ const { sequelize } = require('./models');
 const seedRoles = require('./seeders/roles_seeder');
 const seedModalities = require('./seeders/modalities_seeder');
 const seedStatuses = require('./seeders/statuses_seeder');
-const seedAdminUser = require('./seeders/users_seeder');
+const seedUsers = require('./seeders/users_seeder');
+const seedCourses = require('./seeders/courses_seeder');
+const seedEnrollments = require('./seeders/enrollment_seeder');
 
 const app = express();
+
+// Configuración de CORS - Añade esto antes de los otros middlewares
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+
 
 // Middleware
 app.use(express.json());
@@ -35,7 +47,10 @@ const initializeDatabase = async () => {
     await seedRoles();
     await seedModalities();
     await seedStatuses();
-    await seedAdminUser();
+    await seedUsers();
+    await seedCourses();
+    await seedEnrollments();
+    
   } catch (error) {
     console.error('Error al inicializar la base de datos:', error.message);
   }
