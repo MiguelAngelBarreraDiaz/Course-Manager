@@ -3,7 +3,7 @@ version: '3.9'
 services:
   backend:
     build:
-      context: ./COURSE-MANAGER-BACKEND      # Ruta donde está el Dockerfile
+      context: ./Course-Manager-Backend      # Ruta donde está el Dockerfile
       dockerfile: Dockerfile                 # Nombre del Dockerfile
     container_name: course-Manager-Backend   # Nombre del contenedor
     ports:
