@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { User } = require('../models');
 
-const secret = process.env.JWT_SECRET || 'your_jwt_secret';
+const secret = process.env.JWT_SECRET || 'C0IPMDPiGV';
 
 /**
  * Genera un token JWT para un usuario.
@@ -36,7 +36,28 @@ const authenticateUser = async (email, password) => {
   return generateToken(user);
 };
 
+/**
+ * Valida un token JWT.
+ * 
+ * @param {string} token - El token JWT a validar.
+ * @returns {Object} - El usuario decodificado.
+ * @throws {Error} - Si el token no es válido.
+ */
+const validateToken = async (token) => {
+  try {
+    const decoded = jwt.verify(token, secret);
+    const user = await User.findByPk(decoded.id);
+    if (!user) {
+      throw new Error('Token inválido');
+    }
+    return user;
+  } catch (error) {
+    throw new Error('Token inválido: ' + error.message);
+  }
+};
+
 module.exports = {
   generateToken,
-  authenticateUser
+  authenticateUser,
+  validateToken
 };

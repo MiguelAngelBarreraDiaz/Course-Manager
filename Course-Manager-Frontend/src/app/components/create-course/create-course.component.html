@@ -1,0 +1,29 @@
+<div class="container mt-4" style="max-width: 600px;">
+    <h2 class="mb-4">Crear Curso</h2>
+    <form (ngSubmit)="createCourse()" #courseForm="ngForm">
+      <div class="form-group mb-3">
+        <label for="name" class="form-label">Nombre del Curso</label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="course.name" name="name" required>
+      </div>
+      <div class="form-group mb-3">
+        <label for="modality_id" class="form-label">Modalidad</label>
+        <select id="modality_id" class="form-control" [(ngModel)]="course.modality_id" name="modality_id" required>
+            <option value="" disabled selected>Seleccione una modalidad</option>
+            <option value="1">Virtual</option>
+            <option value="2">Remoto</option>
+            <option value="3">Presencial</option>
+          </select>
+      </div>
+      <div class="form-group mb-3">
+        <label for="duration" class="form-label">Duración (Semanas) </label>
+        <input type="number" id="duration" class="form-control" [(ngModel)]="course.duration" name="duration" required>
+      </div>
+      <div class="form-group mb-3">
+        <label for="quota" class="form-label">Cupo</label>
+        <input type="number" id="quota" class="form-control" [(ngModel)]="course.quota" name="quota" required>
+      </div>
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary" [disabled]="!courseForm.form.valid">Crear Curso</button>
+      </div>
+    </form>
+  </div>

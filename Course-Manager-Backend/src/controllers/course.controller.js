@@ -1,5 +1,7 @@
 const courseService = require('../services/course.service');
 
+
+
 /**
  * Controlador para crear un nuevo curso.
  * 
@@ -60,9 +62,41 @@ const deleteCourse = async (req, res) => {
   }
 };
 
+/**
+ * Controlador para obtener todos los cursos.
+ * 
+ * @param {Object} req - La solicitud HTTP.
+ * @param {Object} res - La respuesta HTTP.
+ */
+const getAllCourses = async (req, res) => {
+  try {
+    const courses = await courseService.getAllCourses();
+    res.status(200).json(courses);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+/**
+ * Controlador para obtener todos los estudiantes matriculados en un curso por su ID.
+ * 
+ * @param {Object} req - La solicitud HTTP.
+ * @param {Object} res - La respuesta HTTP.
+ */
+const getStudentsByCourseId = async (req, res) => {
+  try {
+    const students = await courseService.getStudentsByCourseId(Number(req.params.id));
+    res.status(200).json(students);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createCourse,
   getCourseById,
   updateCourse,
-  deleteCourse
+  deleteCourse,
+  getAllCourses,
+  getStudentsByCourseId
 };

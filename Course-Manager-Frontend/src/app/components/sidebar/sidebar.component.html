@@ -1,0 +1,22 @@
+<nav class="d-flex flex-column p-3" style="width: 250px; height: 100vh;">
+  <h5 class="text-center">Aulas App</h5>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link" aria-current="page">
+        Cursos
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/create-user" routerLinkActive="active" class="nav-link">
+        Crear Usuario
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/create-course" routerLinkActive="active" class="nav-link">
+        Crear Curso
+      </a>
+    </li>
+  </ul>
+  <hr>
+</nav>

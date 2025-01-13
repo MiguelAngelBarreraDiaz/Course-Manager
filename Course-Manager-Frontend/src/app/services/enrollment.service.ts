@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Enrollment } from '../models/enrollment.model';
 
@@ -11,31 +11,43 @@ export class EnrollmentService {
 
   constructor(private http: HttpClient) {}
 
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders().set('Authorization', `${token}`);
+  }
+
   getEnrollments(): Observable<Enrollment[]> {
-    return this.http.get<Enrollment[]>(this.apiUrl);
+    const headers = this.getHeaders();
+    return this.http.get<Enrollment[]>(this.apiUrl, { headers });
   }
 
   getEnrollmentById(id: number): Observable<Enrollment> {
-    return this.http.get<Enrollment>(`${this.apiUrl}/${id}`);
+    const headers = this.getHeaders();
+    return this.http.get<Enrollment>(`${this.apiUrl}/${id}`, { headers });
   }
 
   getEnrollmentsByUserId(userId: number): Observable<Enrollment[]> {
-    return this.http.get<Enrollment[]>(`${this.apiUrl}/user/${userId}`);
+    const headers = this.getHeaders();
+    return this.http.get<Enrollment[]>(`${this.apiUrl}/user/${userId}`, { headers });
   }
 
   getEnrollmentsByProfessorId(professorId: number): Observable<Enrollment[]> {
-    return this.http.get<Enrollment[]>(`${this.apiUrl}/professor/${professorId}`);
+    const headers = this.getHeaders();
+    return this.http.get<Enrollment[]>(`${this.apiUrl}/professor/${professorId}`, { headers });
   }
 
   createEnrollment(enrollment: Enrollment): Observable<Enrollment> {
-    return this.http.post<Enrollment>(this.apiUrl, enrollment);
+    const headers = this.getHeaders();
+    return this.http.post<Enrollment>(this.apiUrl, enrollment, { headers });
   }
 
   updateEnrollment(id: number, enrollment: Enrollment): Observable<Enrollment> {
-    return this.http.put<Enrollment>(`${this.apiUrl}/${id}`, enrollment);
+    const headers = this.getHeaders();
+    return this.http.put<Enrollment>(`${this.apiUrl}/${id}`, enrollment, { headers });
   }
 
   deleteEnrollment(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    const headers = this.getHeaders();
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers });
   }
 }

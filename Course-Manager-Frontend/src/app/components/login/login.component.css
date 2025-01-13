@@ -1,98 +1,118 @@
+/* Modo oscuro usando las variables de Bootstrap */
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f5f7fa;
-    padding: 1rem;
-  }
-  
-  .login-card {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .login-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .login-header h1 {
-    color: #2d3748;
-    margin: 0;
-    font-size: 1.8rem;
-    font-weight: 600;
-  }
-  
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #4a5568;
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.2s ease;
-  }
-  
-  .form-group input:focus {
-    outline: none;
-    border-color: #4299e1;
-  }
-  
-  .error-message {
-    color: #e53e3e;
-    font-size: 0.8rem;
-    margin-top: 0.5rem;
-  }
-  
-  button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #4299e1;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  button:hover:not(:disabled) {
-    background-color: #3182ce;
-  }
-  
-  button:disabled {
-    background-color: #a0aec0;
-    cursor: not-allowed;
-  }
-  
-  .forgot-password {
-    text-align: center;
-    margin-top: 1rem;
-  }
-  
-  .forgot-password a {
-    color: #4299e1;
-    text-decoration: none;
-    font-size: 0.9rem;
-  }
-  
-  .forgot-password a:hover {
-    text-decoration: underline;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bs-dark);
+  padding: 1rem;
+}
+
+.login-card {
+  background-color: var(--bs-gray-800);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--bs-gray-700);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-header h1 {
+  color: var(--bs-light);
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--bs-gray-300);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--bs-gray-700);
+  border: 2px solid var(--bs-gray-600);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  color: var(--bs-light);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-group input::placeholder {
+  color: var(--bs-gray-500);
+}
+
+.error-message {
+  color: var(--bs-danger);
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--bs-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--bs-primary-dark);
+  color: var(--bs-light);
+}
+
+button:disabled {
+  background-color: var(--bs-gray-600);
+  cursor: not-allowed;
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.forgot-password a {
+  color: var(--bs-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.forgot-password a:hover {
+  color: var(--bs-primary-dark);
+  text-decoration: underline;
+}
+
+/* Estilos adicionales para elementos en modo oscuro */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--bs-light);
+  -webkit-box-shadow: 0 0 0px 1000px var(--bs-gray-700) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}

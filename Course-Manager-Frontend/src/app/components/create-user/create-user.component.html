@@ -1,0 +1,38 @@
+<div class="container mt-4" style="max-width: 600px;">
+  <h2 class="mb-4">Crear Usuario</h2>
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <div class="form-group mb-3">
+      <label for="first_name" class="form-label">Nombre</label>
+      <input type="text" id="first_name" class="form-control" [(ngModel)]="user.first_name" name="first_name" required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="last_name" class="form-label">Apellido</label>
+      <input type="text" id="last_name" class="form-control" [(ngModel)]="user.last_name" name="last_name" required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="email" class="form-label">Correo Electrónico</label>
+      <input type="email" id="email" class="form-control" [(ngModel)]="user.email" name="email" required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input type="password" id="password" class="form-control" [(ngModel)]="user.password" name="password" required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="phone" class="form-label">Teléfono</label>
+      <input type="text" id="phone" class="form-control" [(ngModel)]="user.phone" name="phone">
+    </div>
+    <div class="form-group mb-3">
+      <label for="role_id" class="form-label">Rol</label>
+      <select id="role_id" class="form-control" [(ngModel)]="user.role_id" name="role_id" required>
+        <option value="" disabled selected>Seleccione un rol</option>
+        <option value="1">Admin</option>
+        <option value="2">Coordinador</option>
+        <option value="3">Docente</option>
+        <option value="4">Estudiante</option>
+      </select>
+    </div>
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary" [disabled]="!userForm.form.valid">Crear Usuario</button>
+    </div>
+  </form>
+</div>

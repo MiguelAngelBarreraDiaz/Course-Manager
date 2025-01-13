@@ -76,9 +76,52 @@ const deleteCourse = async (id) => {
   }
 };
 
+/**
+ * Obtiene todos los cursos.
+ * 
+ * @returns {Array} - La lista de todos los cursos.
+ * @throws {Error} - Si ocurre un error al obtener los cursos.
+ */
+const getAllCourses = async () => {
+  try {
+    const courses = await Course.findAll();
+    return courses;
+  } catch (error) {
+    throw new Error('Error al obtener los cursos: ' + error.message);
+  }
+};
+
+/**
+ * Obtiene todos los estudiantes matriculados en un curso por su ID.
+ * 
+ * @param {number} courseId - El ID del curso.
+ * @returns {Array} - La lista de estudiantes matriculados en el curso.
+ * @throws {Error} - Si ocurre un error al obtener los estudiantes.
+ */
+const getStudentsByCourseId = async (courseId) => {
+  try {
+    const students = await UserCourse.findAll({
+      where: { course_id: courseId, role_id: 4 }, // role_id 4 para estudiantes
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: ['id', 'first_name', 'last_name', 'email']
+        }
+      ]
+    });
+    return students.map(enrollment => enrollment.user);
+  } catch (error) {
+    throw new Error('Error al obtener los estudiantes: ' + error.message);
+  }
+};
+
+
 module.exports = {
   createCourse,
   getCourseById,
   updateCourse,
-  deleteCourse
+  deleteCourse,
+  getAllCourses,
+  getStudentsByCourseId
 };

@@ -8,7 +8,8 @@ const { sequelize } = require('./models');
 const seedRoles = require('./seeders/roles_seeder');
 const seedModalities = require('./seeders/modalities_seeder');
 const seedStatuses = require('./seeders/statuses_seeder');
-const seedAdminUser = require('./seeders/users_seeder');
+const seedUsers = require('./seeders/users_seeder');
+const seedCourses = require('./seeders/courses_seeder');
 
 const app = express();
 
@@ -45,7 +46,9 @@ const initializeDatabase = async () => {
     await seedRoles();
     await seedModalities();
     await seedStatuses();
-    await seedAdminUser();
+    await seedUsers();
+    await seedCourses;
+
   } catch (error) {
     console.error('Error al inicializar la base de datos:', error.message);
   }
